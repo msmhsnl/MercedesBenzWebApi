@@ -17,7 +17,7 @@ namespace MercedesBenzWebApi.Controllers
 
         public List<ProductModel> GetProductsByModel(string model)
         {
-            if(model == "all"){
+            if(model == "All"){
                 List<ProductModel> ProductList = db.Products.Select(a => new ProductModel()
                 {
                     Model = a.Model,
