@@ -13,12 +13,28 @@ namespace MercedesBenzWebApi.Controllers
     {
         MercedesBenzEntities db = new MercedesBenzEntities();
 
-        
+
 
         public List<ProductModel> GetProductsByModel(string model)
         {
-            if(model == "All"){
+            if (model == "All")
+            {
                 List<ProductModel> ProductList = db.Products.Select(a => new ProductModel()
+                {
+                    Model = a.Model,
+                    Name = a.Name,
+                    Slogan = a.Slogan,
+                    IsNew = a.IsNew,
+                    Discountable = a.Discountable,
+                    ImgSrc = a.ImgSrc
+                }).ToList();
+
+                return ProductList;
+            }
+            else if (model == "Featured")
+            {
+                List<ProductModel> ProductList = db.Products.Where(a => a.ProductID == 4)
+                .Select(a => new ProductModel()
                 {
                     Model = a.Model,
                     Name = a.Name,
@@ -45,7 +61,7 @@ namespace MercedesBenzWebApi.Controllers
 
                 return ProductList;
             }
-            
+
         }
     }
 }
